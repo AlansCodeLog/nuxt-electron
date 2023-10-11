@@ -57,7 +57,11 @@ export default defineNuxtConfig({
 import { app, BrowserWindow } from 'electron'
 
 app.whenReady().then(() => {
-  new BrowserWindow().loadURL(process.env.VITE_DEV_SERVER_URL)
+  if (process.env.VITE_DEV_SERVER_URL) {
+		win.loadURL(process.env.VITE_DEV_SERVER_URL)
+	} else {
+		win.loadFile(path.join(__dirname, '../dist-electron', '.output/index.html'))
+	}
 })
 ```
 
